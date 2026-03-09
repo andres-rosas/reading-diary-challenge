@@ -26,7 +26,26 @@ class Book:
         self.notes :List[Note] = []
 
     def add_note(self, text : str, page : int, date: datetime)-> bool:
+        if page > self.pages:
+            return False
+        else:
+            note = Note(text, page, date)
+            self.notes.append(note)
+            return True
 
+    def set_rating(self, rating : int)-> bool:
+        if rating not in (Book.EXCELLENT, Book.GOOD, Book.BAD):
+            return False
+        else:
+            self.rating = rating
+            return True
+
+    def get_notes_of_page(self, page: int) -> List[Note]:
+        notes_of_page: List[Note] = []
+        for note in self.notes:
+            if note.page == page:
+                notes_of_page.append(note)
+        return notes_of_page
 
 
 
